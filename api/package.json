@@ -1,0 +1,24 @@
+{
+  "name": "growsoft",
+  "version": "1.0.0",
+  "description": "Mean stack app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "dependencies": {
+    "express":"*",
+    "mongoose":"*",
+    "bcrypt-nodejs":"*",
+    "cors":"*",
+    "jsonwebtoken":"*",
+    "body-parser":"*",
+    "jwt-simple": "*",
+    "connect-multiparty": "*",
+    "moment": "*",
+    "mongoose-pagination": "^1.0.0"
+  },
+  "author": "Victor Manrique",
+  "license": "ISC"
+}
