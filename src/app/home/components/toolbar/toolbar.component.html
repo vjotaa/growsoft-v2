@@ -1,0 +1,33 @@
+<nav class="navbar navbar-toggleable-md navbar-light fixed-top bg-faded" [class.bg-faded-change]="isScrolled">
+  <a routerLink="inicio">
+    <img class="rounded mx-auto d-block size" [src]="imagePath"  alt="">
+  </a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler-5" aria-controls="navbarToggler-5"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="container">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarToggler-5">
+      <ul class="navbar-nav mt-2 mt-md-0">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="!identity" routerLink="iniciar-sesion">Iniciar sesion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="proyectos">Proyectos</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="identity" class="nav-link" [routerLink]=" ['/usuario',identity._id] ">{{identity.name}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="equipo">Quienes somos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="contacto">Contacto</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="identity" (click)="logout()" class="nav-link">Salir</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

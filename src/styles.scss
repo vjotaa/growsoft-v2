@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+h1,
+a,
+p {
+  font-family: 'Poppins', sans-serif;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 17px;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Poppins', sans-serif;
+  color: rgba(0, 0, 0, 0.6);
+}
+a {
+  font-size: 15px;
+  text-decoration: none;
+  color: inherit;
+
+  :hover {
+    color: inherit;
+  }
+}
+.no-margin {
+  margin: 0px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.no-padding {
+  padding: 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.b-t {
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+::-webkit-scrollbar {
+  width: 9px; /* for vertical scrollbars */
+  height: 9px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(239, 67, 53, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(239, 67, 53, 0.9);
+}
+
+.padding-side {
+  padding-right: 60px;
+  padding-left: 60px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #ef4b3e;
+  border-color: #d9534f;
+}
+
+.btn-primary:hover {
+  background-color: #d82c20;
+  border-color: #d9534f;
+}
+.margin-bottom {
+  margin-bottom: 12px;
+}

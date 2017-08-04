@@ -1,0 +1,18 @@
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p>{{project?.title}}</p>
+        <p>{{project?.description}}</p>
+        <div *ngIf="project?.image && project?.image!='null'" >
+          <img src= '{{url+"imagen-proyecto/"+project?.image}}' style="width: 500px;" alt="">
+          <app-project-edit [hidden]="!isOn"></app-project-edit>
+          
+        <div>
+      </div>
+    </div>
+    <div *ngIf="identity">
+    <p><button *ngIf="project.user._id == identity._id"  (click)="setState()">Editar proyecto</button><p>
+      
+    </div>
+  </div>

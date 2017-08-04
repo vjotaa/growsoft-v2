@@ -1,0 +1,35 @@
+<div *ngIf="identity">
+  <div class="container b-t">
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        {{alertMessage}}
+        <form [formGroup]="rForm" (ngSubmit)="onSubmit()">
+          <div formGroupName="update">
+            <div class="margin-bottom">
+              <label class="sr-only">Nombre</label>
+              <input class="form-control" type="name" formControlName='name' [(ngModel)]="user.name">
+            </div>
+            <div class="margin-bottom">
+              <label class="sr-only">Apellido</label>
+              <input class="form-control" type="lastname" formControlName='lastname' [(ngModel)]="user.lastname">
+            </div>
+            <div class="margin-bottom">
+              <div class="center" *ngIf="user.image && user.image != null">
+                <img src='{{url+"ver-imagen/"+user.image}}' alt="">
+                <p>
+
+                  <label>Sube tu imagen</label>
+                  <input type="file" placegolder="Upload image..." (change)="fileChangeEvent($event)">
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="center">
+
+            <input class="btn btn-primary btn-md" type="submit" value="Actualizar informacion" [disabled]="rForm.invalid">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

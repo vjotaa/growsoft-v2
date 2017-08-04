@@ -1,0 +1,65 @@
+<header class="front-header">
+  <div class="header-content">
+    <div [ngsReveal]="{duration:500}" class="header-content-inner">
+      <img class="logo-size" [src]="logoPath">
+    </div>
+  </div>
+</header>
+<section id="projects">
+  <div class="container b-t ">
+    <p>Proyectos recientes</p>
+    <div class="row">
+      <div class="col-lg-6 col-xs-12 portfolio-item" *ngFor="let project of (projects ? projects.slice(0,4): [])">
+        <div class="project-item">
+          <a [routerLink]="['/proyecto',project._id]">
+            <div class="portfolio-box card h-100">
+              <div *ngIf="project.image=='null';else imageDefault">
+                <img class="card-img-top img-fluid" [src]="image_not_found">
+              </div>
+              <ng-template #imageDefault>
+                <img class="card-img-top img-fluid" [src]="url+'imagen-proyecto/'+project.image">
+              </ng-template>
+              <div class="portfolio-box-caption">
+
+                <div class="portfolio-box-caption-content">
+                  <div class="project-description">
+                    {{project.description}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="project-title">{{project.title}}</p>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-1">
+  <div [ngsReveal]="{duration:600}" class="container">
+    <div class="row no-margin">
+      <div class="col-lg-6 col-xs-12">
+        <h2 class="section-1-title center">Nuestra principal <span class="extend-color">responsabilidad</span> es ayudarte a ser grande como empresa</h2>
+        <p class="section-1-description">Growsoft te ofrece un excelente servicio con excelentes tecnologias que actualmente se utilizan en el mercado, ademas
+          de proveer un diseño personalizado para que el usuario se siente a gusto con el mismo.
+        </p>
+      </div>
+      <div class="col-lg-6 col-xs-12 center">
+        <img [src]="section_1_Img" class="section-1-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-2">
+  <div class="header-content">
+    <div class="header-content-inner">
+      <h1 class="section-2-title">Quieres que colaboremos en tu proyecto?</h1>
+      <p>Ademas de ofrecerte un servicio de desarrollo, tambien podemos formar parte de algun proyecto que tengas en metente,
+        contactanos
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+$default-color: #ef4335;
+#gradient {
+  background: #999955;
+  background-image: linear-gradient(
+    #dab046 20%,
+    #d73b25 20%,
+    #d73b25 40%,
+    #c71b25 40%,
+    #c71b25 60%,
+    #961a39 60%,
+    #961a39 80%,
+    #601035 80%
+  );
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 100%;
+  height: 180px;
+}
+
+.header-team-img {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(96, 16, 53, 0.4)),
+    url('/assets/images/team.jpeg');
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+}
+
+.header-team-img .header-content {
+  position: relative;
+  width: 100%;
+  padding: 100px 15px 100px;
+  text-align: center;
+  height: 500px;
+}
+
+.header-team-img .header-content .header-content-inner h1 {
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: white;
+  font-size: 5em;
+}
+.header-team-img .header-content .header-content-inner hr {
+  margin: 30px auto;
+}
+.selected-hero {
+  color: $default-color;
+}
+@media (min-width: 768px) {
+  .header-team-img {
+    height: 100%;
+    min-height: 600px;
+  }
+  .header-team-img .header-content {
+    position: absolute;
+    padding: 30px 50px;
+    transform: translateY(50%);
+  }
+  .header-team-img .header-content .header-content-inner {
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.card {
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.portfolio-box {
+  position: relative;
+  display: block;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.portfolio-box .portfolio-box-caption {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  opacity: 0;
+  color: white;
+  background: rgba(239, 67, 53, 0.5);
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
+}
+.portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  text-align: center;
+}

@@ -1,0 +1,59 @@
+<div class="container-fluid no-padding b-t">
+  <div class="background-color">
+    <section id=profile-button *ngIf="identity; else buttonHero">
+      <a routerLink="/actualizar-usuario/{{user?._id}}">
+        <div class="btn btn-outline-info btn-sm">Editar perfil
+        </div>
+      </a>
+      <a routerLink="/crear-proyecto">
+        <div class="btn btn-outline-info btn-sm">Crear proyecto
+        </div>
+      </a>
+    </section>
+    <ng-template #buttonHero>
+      <a class="pointer">
+        <div class="btn btn-outline-info btn-sm" (click)="onLimit()">{{limit ? 'Ver mas proyectos' : 'Ver menos proyectos'}}
+        </div>
+      </a>
+    </ng-template>
+    <div class="row no-margin">
+      <div class=" profile col-12 col-lg-4 offset-lg-4 col-xs-12 col-sm-8 offset-sm-2">
+        <img src='{{url+"ver-imagen/"+user?.image}}'>
+        <div class="description-profile">
+          <h4 class="center">{{user?.name}} {{user?.lastname}}</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad quaerat cum minima optio explicabo blanditiis, fugit
+            laborum provident quisquam minus rerum dicta, quis, suscipit dolores architecto in? Debitis, adipisci, aliquid!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row no-margin">
+    <div class="col-lg-6 col-xs-12 portfolio-item" *ngFor="let project of (projects ? projects.slice(0,limit? 4:6): [])">
+      <div class="project-item">
+        <a [routerLink]="['/proyecto',project._id]">
+          <div class="portfolio-box card h-100">
+            <div *ngIf="project.image=='null';else imageDefault">
+              <img class="card-img-top img-fluid" [src]="image_not_found">
+            </div>
+            <ng-template #imageDefault>
+              <img class="card-img-top img-fluid" [src]="url+'imagen-proyecto/'+project.image">
+            </ng-template>
+            <div class="portfolio-box-caption">
+
+              <div class="portfolio-box-caption-content">
+                <div class="project-description">
+                  {{project.description}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="project-name">{{project.title}}</p>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>

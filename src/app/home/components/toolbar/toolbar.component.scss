@@ -1,0 +1,40 @@
+li {
+  list-style: none;
+  display: inline;
+
+  a {
+    cursor: pointer;
+  }
+}
+img {
+  width: 25px;
+}
+
+ul {
+  text-align: center;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  font-weight: solid;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #ef4335;
+  -webkit-transition: color 0.3s ease-out;
+  -ms-transition: color 0.3s ease-out;
+  -moz-transition: color 0.3s ease-out;
+  -o-transition: color 0.3s ease-out;
+  transition: color 0.3s ease-out;
+}
+
+.bg-faded {
+  background-color: rgba(255, 255, 255, 0.2);
+  height: 50px;
+  transition: 0.3s ease-out;
+}
+
+.bg-faded-change {
+  background-color: rgba(255, 255, 255, 1);
+  height: 60px;
+  transition: 0.3s ease-out;
+}

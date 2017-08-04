@@ -1,0 +1,30 @@
+<section id="projects">
+  <div class="container b-t ">
+    <div *ngIf="projects" class="row">
+      <div class="col-lg-6 col-xs-12 portfolio-item" *ngFor="let project of projects">
+        <div class="project-item">
+          <a [routerLink]="['/proyecto',project._id]">
+            <div class="portfolio-box card h-100">
+              <div *ngIf="project.image=='null';else imageDefault">
+                <img class="card-img-top img-fluid" [src]="image_not_found">
+              </div>
+              <ng-template #imageDefault>
+                <img class="card-img-top img-fluid" [src]="url+'imagen-proyecto/'+project.image">
+              </ng-template>
+              <div class="portfolio-box-caption">
+
+                <div class="portfolio-box-caption-content">
+                  <div class="project-description">
+                    {{project.description}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="project-name">{{project.title}}</p>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<div class="container b-t">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Contactanos
+      </h2>
+      <div *ngIf="messageSentSuccess" class="alert alert-success alert-dismissible">
+        Mensaje enviado <strong>Correctamente!</strong>
+      </div>
+      <div *ngIf="messageSentError" class="alert alert-warning alert-dismissible">
+        <strong>Error al enviar el mensaje</strong>,Por favor revisa bien que no hayas dejado ningun espacio en blanco.
+      </div>
+      <form [formGroup]="emailForm" (ngSubmit)="onSubmit(emailForm)" id="contact">
+        <div class="form-group form-group-lg">
+
+          <input class="form-control" type="text" [formControl]="emailForm.controls['name']" placeholder="Nombre">
+        </div>
+        <div class="form-group form-group-lg">
+          <input class="form-control" type="email" [formControl]="emailForm.controls['email']" placeholder="Correo electronico">
+        </div>
+        <div class="form-group form-group-lg">
+          <textarea class="form-control" rows="5" [formControl]="emailForm.controls['message']" placeholder="Mensaje..."></textarea>
+        </div>
+        <button class="btn btn-primary btn-md" type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+</div>
