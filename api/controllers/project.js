@@ -28,7 +28,8 @@ function saveProject(req, res) {
   project.project_url = params.project_url;
   project.image = "null";
   project.user = params.user;
-
+  project.tool = params.tool;
+  
   project.save((err, projectStored) => {
     if (err) {
       res.send({ message: "Error al guardar el proyecto" });
@@ -51,9 +52,9 @@ function getProjects(req, res) {
   } else {
     var find = Project.find({ user: userId }).sort({ date: "desc" });
   }
-  find.populate({ path: "tool" }).exec((err, projects) => {
+  find.populate({ path: "user" }).exec((err, projects) => {
     if (err) {
-      res.send({ msg: "Error en la peticion" });
+      res.send({ msg: "Error in te request" });
     } else {
       !projects
         ? res.send({ msg: "No estan los proyectos" })

@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 var config = require("../config/database");
 var user = require("./user");
+var tool = require("./tool");
 var Schema = mongoose.Schema;
 
 var ProjectSchema = Schema({
@@ -9,7 +10,8 @@ var ProjectSchema = Schema({
   project_url: { type: String, require: true },
   image: String,
   date: { type: Date, default: Date.now },
-  user: { type: Schema.ObjectId, ref: "User" }
+  user: { type: Schema.ObjectId, ref: "User" },
+  tool: { type: Schema.ObjectId, ref: "Tool" }
 });
 
 var Project = (module.exports = mongoose.model("Project", ProjectSchema));
