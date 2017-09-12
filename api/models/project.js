@@ -11,7 +11,7 @@ var ProjectSchema = Schema({
   image: String,
   date: { type: Date, default: Date.now },
   user: { type: Schema.ObjectId, ref: "User" },
-  tool: { type: Schema.ObjectId, ref: "Tool" }
+  tool: [{ type: Schema.ObjectId, ref: "Tool" }]
 });
 
 var Project = (module.exports = mongoose.model("Project", ProjectSchema));
