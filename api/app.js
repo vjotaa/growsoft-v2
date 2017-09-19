@@ -8,7 +8,9 @@ const app = express();
 const users_route = require("./routes/user");
 const projects_route = require("./routes/project");
 const tools_route = require("./routes/tool");
-//Port
+const roles_route = require("./routes/role");
+const jobs_route = require("./routes/job");
+//Port.
 const port = process.env.PORT || 3000;
 
 //Connect to database and verificate errors
@@ -49,4 +51,6 @@ app.use((req, res, next) => {
 app.use("/api", users_route);
 app.use("/api", projects_route);
 app.use("/api", tools_route);
+app.use("/api", roles_route);
+app.use("/api", jobs_route);
 //Index route
