@@ -15,6 +15,10 @@ project.post(
   ProjectController.saveProject
 );
 project.get("/proyectos/:user?", ProjectController.getProjects);
+project.get(
+  "/proyectos-herramienta/:tool?",
+  ProjectController.getProjectsByTool
+);
 project.put(
   "/actualizar-proyecto/:id",
   md_auth.ensureAuth,

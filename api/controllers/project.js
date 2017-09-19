@@ -2,8 +2,8 @@
 var fs = require("fs");
 var path = require("path");
 var user = require("../models/user");
+var tool = require("../models/tool");
 var Project = require("../models/project");
-var q = require("q");
 
 function getProject(req, res) {
   projectId = req.params.id;
@@ -28,7 +28,7 @@ function saveProject(req, res) {
   project.project_url = params.project_url;
   project.image = "null";
   project.user = params.user;
-  project.tool = params.tool.replace(/\s/g, "").split(",");
+  project.tools = params.tools.replace(/\s/g, "").split(",");
 
   project.save((err, projectStored) => {
     if (err) {
@@ -63,7 +63,23 @@ function getProjects(req, res) {
   });
 }
 
-function getProjectsByTool(req, res) {}
+function getProjectsByTool(req, res) {
+  var toolId = req.params.tool;
+  if (!toolId) {
+    var find = Project.find({}).sort({ date: "desc" });
+  } else {
+    var find = Project.find({ tools: toolId }).sort({ date: "desc" });
+  }
+  find.populate({ path: "tools", select: "name" }).exec((err, projects) => {
+    if (err) {
+      res.send({ msg: "Error in the request" });
+    } else {
+      !projects
+        ? res.send({ msg: "No estan los proyectos" })
+        : res.send({ projects });
+    }
+  });
+}
 
 function updateProject(req, res) {
   var projectId = req.params.id;
@@ -154,5 +170,6 @@ module.exports = {
   updateProject,
   deleteProject,
   getImageFile,
-  uploadImage
+  uploadImage,
+  getProjectsByTool
 };
