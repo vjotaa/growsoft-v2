@@ -1,7 +1,8 @@
-'use strict';
-
-var mongoose = require('mongoose');
+"use strict";
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var role = require("./role");
+var jobs = require("./job");
 
 var UserSchema = Schema({
   name: String,
@@ -10,7 +11,9 @@ var UserSchema = Schema({
   biography: String,
   username: String,
   password: String,
-  image: String
+  image: String,
+  jobs: [{ type: Schema.ObjectId, ref: "Jobs" }],
+  role: { type: Schema.ObjectId, ref: "roles" }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
