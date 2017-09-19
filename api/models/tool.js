@@ -8,4 +8,4 @@ var ToolSchema = Schema({
   user: { type: Schema.ObjectId, ref: "User" }
 });
 
-var Tool = (module.exports = mongoose.model("Tool", ToolSchema));
+var Tool = (module.exports = mongoose.model("Tools", ToolSchema));
