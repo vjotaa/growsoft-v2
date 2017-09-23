@@ -12,7 +12,9 @@ const roles_route = require("./routes/role");
 const jobs_route = require("./routes/job");
 const status_route = require("./routes/status");
 const proposalP_route = require("./routes/proposal-project");
+const proposalW_route = require("./routes/proposal-work");
 const notification_route = require("./routes/notification");
+const notificationW_route = require("./routes/notification-work");
 //Port.
 const port = process.env.PORT || 3000;
 
@@ -58,5 +60,7 @@ app.use("/api", roles_route);
 app.use("/api", jobs_route);
 app.use("/api", status_route);
 app.use("/api", proposalP_route);
+app.use("/api", proposalW_route);
 app.use("/api", notification_route);
+app.use("/api", notificationW_route);
 //Index route
