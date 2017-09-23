@@ -12,12 +12,21 @@ function createProposal(req, res) {
   proposalProject.description = params.description;
   proposalProject.price = params.price;
   proposalProject.tools = params.tools.replace(/\s/g, "").split(",");
-  proposalProject.programmers = params.programmers
-    .replace(/\s/g, "")
-    .split(",");
-  proposalProject.designers = params.designers.replace(/\s/g, "").split(",");
-  proposalProject.status = "59c191a76dd53e08d75d56da";
+  proposalProject.programmers = _empty(params.programmers);
+  proposalProject.designers = _empty(params.designers);
+  proposalProject.status = "59c558d4be86a7479c199bf3";
   proposalProject.user = params.user;
+
+  function _empty(value) {
+    if (value) {
+      console.log("pasa");
+      value = value.replace(/\s/g, "").split(",");
+    } else {
+      console.log("indenfinido");
+      value;
+    }
+    return value;
+  }
 
   proposalProject.save((err, proposalProjectStored) => {
     if (err) {
@@ -36,11 +45,12 @@ function createProposal(req, res) {
 }
 
 function getProposals(req, res) {
-  var userId = req.params.user;
-  if (!userId) {
+  var proposalId = req.params.id;
+  console.log(proposalId);
+  if (!proposalId) {
     var find = ProposalProject.find({}).sort("title");
   } else {
-    var find = ProposalProject.find({ user: userId }).sort("title");
+    var find = ProposalProject.find({ _id: proposalId }).sort("title");
   }
   find
     .populate({ path: "programmers", select: "name" })
