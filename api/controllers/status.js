@@ -23,7 +23,23 @@ function createStatus(req, res) {
     }
   });
 }
+function getStatus(req, res) {
+  var userId = req.params.user;
+  if (!userId) {
+    var find = Status.find({}).sort("title");
+  } else {
+    var find = Status.find({ user: userId }).sort("title");
+  }
+  find.populate({ path: "user" }).exec((err, status) => {
+    if (err) {
+      res.send({ msg: "Error in te request" });
+    } else {
+      !status ? res.send({ msg: "No estan los Status" }) : res.send({ status });
+    }
+  });
+}
 
 module.exports = {
-  createStatus
+  createStatus,
+  getStatus
 };
