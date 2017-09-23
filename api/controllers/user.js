@@ -17,7 +17,7 @@ function registerUser(req, res) {
   user.email = params.email;
   user.username = params.username;
   user.image = "null";
-  user.role = "59c146c5bdc1d33a9ad61714";
+  user.role = "59c5580b84e371468a7e3627";
   emailCheck = validator.isEmail(params.email);
 
   //Email existence
@@ -148,6 +148,7 @@ function registerJobsInUser(req, res) {
   var user = new User();
 
   var userId = params.userId;
+  console.log(userId);
   user.jobs = params.jobs.replace(/\s/g, "").split(",");
 
   User.findByIdAndUpdate(userId, params, (err, userUpdated) => {
@@ -163,9 +164,30 @@ function registerJobsInUser(req, res) {
       }
     }
   });
+}
 
-  console.log("Usuario a editar: ", userId);
-  console.log("Jobs que agregar: ", user.jobs);
+function registerRoleInUser(req, res) {
+  var params = req.body;
+  var user = new User();
+
+  var userId = params.userId;
+  console.log(userId);
+  console.log('holaaa');
+  user.role = params.role.replace(/\s/g, "").split(",");
+  console.log('epa: ',params.role);
+  User.findByIdAndUpdate(userId, params, (err, userUpdated) => {
+    if (err) {
+      res.status(500).send({ message: "Error al actualizar el usuario" });
+    } else {
+      if (!userUpdated) {
+        res
+          .status(404)
+          .send({ message: "El usuario no puede ser actualizado" });
+      } else {
+        res.status(200).send({ user: userUpdated });
+      }
+    }
+  });
 }
 
 function uploadImage(req, res) {
@@ -288,5 +310,6 @@ module.exports = {
   getUsers,
   getUsersByRole,
   registerJobsInUser,
-  getUsersByJobs
+  getUsersByJobs,
+  registerRoleInUser
 };
