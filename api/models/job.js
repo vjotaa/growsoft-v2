@@ -1,6 +1,5 @@
 var mongoose = require("mongoose");
 var config = require("../config/database");
-var job = require("./job");
 var Schema = mongoose.Schema;
 
 var JobSchema = Schema({
