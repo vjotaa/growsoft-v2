@@ -11,7 +11,12 @@ var md_upload = multipart({ uploadDir: "./uploads/users" });
 user.post("/registrar-usuario", UserController.registerUser);
 //Login
 user.post("/iniciar-sesion", UserController.loginUser);
-user.put(
+user.post(
+  "/registrar-role",
+  UserController.registerRoleInUser,
+  md_auth.ensureAuth
+);
+user.post(
   "/registrar-trabajos",
   UserController.registerJobsInUser,
   md_auth.ensureAuth
