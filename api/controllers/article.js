@@ -129,7 +129,7 @@ function uploadImage(req, res) {
       file_ext == "jpeg" ||
       file_ext == "gif"
     ) {
-      Project.findByIdAndUpdate(
+      Article.findByIdAndUpdate(
         articleId,
         { image: file_name },
         (err, articleStored) => {
