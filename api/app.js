@@ -16,6 +16,7 @@ const proposalW_route = require("./routes/proposal-work");
 const notification_route = require("./routes/notification");
 const notificationW_route = require("./routes/notification-work");
 const genre_route = require("./routes/genre");
+const article_route = require("./routes/article");
 //Port.
 const port = process.env.PORT || 3000;
 
@@ -65,5 +66,6 @@ app.use("/api", proposalW_route);
 app.use("/api", notification_route);
 app.use("/api", notificationW_route);
 app.use("/api", genre_route);
+app.use("/api", article_route);
 
 //Index route
