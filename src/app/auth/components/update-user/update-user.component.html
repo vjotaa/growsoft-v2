@@ -14,6 +14,10 @@
               <input class="form-control" type="lastname" formControlName='lastname' [(ngModel)]="user.lastname">
             </div>
             <div class="margin-bottom">
+              <label class="sr-only">Biografia</label>
+              <textarea class="form-control" type="biography" formControlName='biography' [(ngModel)]="user.biography"></textarea>
+            </div>
+            <div class="margin-bottom">
               <div class="center" *ngIf="user.image && user.image != null">
                 <img src='{{url+"ver-imagen/"+user.image}}' alt="">
                 <p>

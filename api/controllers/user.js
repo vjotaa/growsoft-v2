@@ -24,52 +24,54 @@ function registerUser(req, res) {
   User.find({ email: params.email.toLowerCase() }, (err, docs) => {
     if (!docs.length) {
       //Username existence
-      User.find({ username: params.username }, (err, docs) => {
-        if (!docs.length) {
-          if (!emailCheck) {
-            res.json({ msg: "Ingrese un email apropiado" });
-          } else {
-            if (params.password) {
-              bcrypt.hash(params.password, null, null, (err, hash) => {
-                user.password = hash;
-                if (
-                  user.name != null &&
-                  user.lastname != null &&
-                  user.email != null
-                ) {
-                  // safe the user
-                  user.save((err, userStored) => {
-                    if (err) {
-                      res.json({
-                        success: false,
-                        msg: "Error al guardar el usuario"
-                      });
-                    } else {
-                      if (!userStored) {
-                        res.json({
-                          success: false,
-                          msg: "El usuario no ha podido ser registrado"
-                        });
-                      } else {
-                        res.status(200).send({ user: userStored });
-                      }
-                    }
-                  });
-                } else {
+      if (params.password) {
+        bcrypt.hash(params.password, null, null, (err, hash) => {
+          user.password = hash;
+          if (
+            user.name != null &&
+            user.lastname != null &&
+            user.email != null
+          ) {
+            // safe the user
+            user.save((err, userStored) => {
+              if (err) {
+                res.json({
+                  success: false,
+                  msg: "Error al guardar el usuario"
+                });
+              } else {
+                if (!userStored) {
                   res.json({
                     success: false,
-                    msg: "Introduce toda la informacion"
+                    msg: "El usuario no ha podido ser registrado"
                   });
+                } else {
+                  res.status(200).send({ user: userStored });
                 }
-              });
-            } else {
-              res.json({ success: false, msg: "Introduce la contraseña" });
-            }
+              }
+            });
+          } else {
+            res.json({
+              success: false,
+              msg: "Introduce toda la informacion"
+            });
           }
-        } else {
-          res.json({ msg: "El nombre de usuario esta registrado" });
-        }
-      });
+        });
+      } else {
+        res.json({ success: false, msg: "Introduce la contraseña" });
+      }
+      // Verificar si el username es igual
+      // User.find({ username: params.username }, (err, docs) => {
+      //   if (!docs.length) {
+      //     if (!emailCheck) {
+      //       res.json({ msg: "Ingrese un email apropiado" });
+      //     } else {
+      //Aqui va el bcrypt
+      //     }
+      //   } else {
+      //     res.json({ msg: "El nombre de usuario esta registrado" });
+      //   }
+      // });
     } else {
       res.json({ msg: "El email ya esta registrado" });
     }
@@ -172,9 +174,9 @@ function registerRoleInUser(req, res) {
 
   var userId = params.userId;
   console.log(userId);
-  console.log('holaaa');
+  console.log("holaaa");
   user.role = params.role.replace(/\s/g, "").split(",");
-  console.log('epa: ',params.role);
+  console.log("epa: ", params.role);
   User.findByIdAndUpdate(userId, params, (err, userUpdated) => {
     if (err) {
       res.status(500).send({ message: "Error al actualizar el usuario" });
@@ -253,13 +255,19 @@ function getUsers(req, res) {
   if (!userId) {
     var find = User.find({});
   }
-  find.populate({ path: "user" }).exec((err, users) => {
-    if (err) {
-      res.send({ msg: "Error en la peticion" });
-    } else {
-      !users ? res.send({ msg: "No estan los usuarios" }) : res.send({ users });
-    }
-  });
+  find
+    .populate({ path: "user", select: "name" })
+    .populate({ path: "role", select: "name" })
+    .populate({ path: "jobs", select: "name" })
+    .exec((err, users) => {
+      if (err) {
+        res.send({ msg: "Error en la peticion" });
+      } else {
+        !users
+          ? res.send({ msg: "No estan los usuarios" })
+          : res.send({ users });
+      }
+    });
 }
 
 function getUsersByRole(req, res) {

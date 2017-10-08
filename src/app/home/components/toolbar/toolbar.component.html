@@ -25,6 +25,12 @@
           <a class="nav-link" routerLink="contacto">Contacto</a>
         </li>
         <li class="nav-item">
+          <a *ngIf="identity && identity.role == '59c5581484e371468a7e3628'" class="nav-link" routerLink="panel-administrativo">Panel administrativo</a>
+        </li>
+        <li class="nav-item">
+          <a *ngIf="!identity" class="nav-link" routerLink="registro">Registrate</a>
+        </li>
+        <li class="nav-item">
           <a *ngIf="identity" (click)="logout()" class="nav-link">Salir</a>
         </li>
       </ul>

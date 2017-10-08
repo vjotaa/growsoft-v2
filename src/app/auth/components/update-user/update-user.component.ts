@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../user';
-import { AuthService } from '../../auth.service';
-import { GLOBAL } from '../../../global';
-import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { GLOBAL } from '../../../global';
+import { AuthService } from '../../auth.service';
+import { User } from '../../user';
 
 @Component({
-  selector: 'app-update-user',
-  templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.scss']
+  selector: "app-update-user",
+  templateUrl: "./update-user.component.html",
+  styleUrls: ["./update-user.component.scss"]
 })
 export class UpdateUserComponent implements OnInit {
   public rForm: FormGroup;
@@ -30,7 +31,8 @@ export class UpdateUserComponent implements OnInit {
     this.rForm = fb.group({
       update: fb.group({
         name: [null, Validators.compose([Validators.required])],
-        lastname: [null, Validators.compose([Validators.required])]
+        lastname: [null, Validators.compose([Validators.required])],
+        biography: [null, Validators.compose([Validators.required])]
         // email: [null, Validators.compose([Validators.email])]
       })
     });
@@ -51,11 +53,11 @@ export class UpdateUserComponent implements OnInit {
       response => {
         if (!response.user) {
           console.log(response.user);
-          this.alertMessage = 'El usuario no se ha actualizado';
+          this.alertMessage = "El usuario no se ha actualizado.";
         } else {
-          console.log('desde el this.user' + this.user.name);
-          console.log('desde el response.user' + response.user.name);
-          localStorage.setItem('identity', JSON.stringify(this.user));
+          console.log("desde el this.user" + this.user.name);
+          console.log("desde el response.user" + response.user.name);
+          localStorage.setItem("identity", JSON.stringify(this.user));
 
           let identity = this.user;
           this.identity = identity;
@@ -63,17 +65,18 @@ export class UpdateUserComponent implements OnInit {
           if (!this.filesToUpload) {
           } else {
             this.makeFileRequest(
-              this.url + 'imagen-usuario/' + this.user._id,
+              this.url + "imagen-usuario/" + this.user._id,
               [],
               this.filesToUpload
             ).then((result: any) => {
               this.user.image = result.image;
-              localStorage.setItem('identity', JSON.stringify(this.user));
-              let image_path = this.url + 'ver-imagen/' + this.user.image;
+              localStorage.setItem("identity", JSON.stringify(this.user));
+              let image_path = this.url + "ver-imagen/" + this.user.image;
             });
           }
-          this.alertMessage = 'El usuario se ha actualizado';
+          this.alertMessage = "El usuario se ha actualizado";
           this.authService.sendIden(this.identity);
+          this.router.navigate(["/usuario/", this.identity._id]);
         }
       },
       error => {
@@ -91,7 +94,7 @@ export class UpdateUserComponent implements OnInit {
       var formData: any = new FormData();
       var xhr = new XMLHttpRequest();
       for (var i = 0; i < files.length; i++) {
-        formData.append('image', files[i], files[i].name);
+        formData.append("image", files[i], files[i].name);
       }
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
@@ -102,8 +105,8 @@ export class UpdateUserComponent implements OnInit {
           }
         }
       };
-      xhr.open('POST', url, true);
-      xhr.setRequestHeader('Authorization', token);
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Authorization", token);
       xhr.send(formData);
     });
   }

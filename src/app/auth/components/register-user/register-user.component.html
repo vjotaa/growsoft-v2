@@ -1,0 +1,43 @@
+<div class="container b-t">
+  <div class="row">
+    <div class=" col-12 col-lg-6 offset-lg-3 offset-lg-3">
+      <div class="box">
+        <form #formUser="ngForm" (ngSubmit)="onSubmit()">
+          <h5>{{title}}</h5>
+          <hr>
+          <div *ngIf="alertMessage">
+            <div class="error">
+              {{alertMessage}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nombre</label>
+            <input class="form-control" placeholder="Ingresa los dos nombres" type="text" name="name" required #name="ngModel" [(ngModel)]="user.name"
+              only-number>
+            <span *ngIf="!name.valid && name.dirty" class="error">El nombre es requerido.</span>
+          </div>
+          <div class="form-group">
+            <label>Apellido </label>
+            <input class="form-control" placeholder="Ingrese su apellido" type="text" name="lastname" required #lastname="ngModel" [(ngModel)]="user.lastname">
+            <span *ngIf="!lastname.valid && lastname.dirty" class="error">El apellido es requerido.</span>
+          </div>
+          <div class="form-group">
+            <label>Correo electronico </label>
+            <input class="form-control" placeholder="Ingrese el correo electronico" type="email" name="email" required #email="ngModel"
+              [(ngModel)]="user.email" email>
+            <span *ngIf="!email.valid && email.dirty" class="error">El correo electronico es requerido es requerido.</span>
+          </div>
+          <div class="form-group">
+            <label>Clave de usuario</label>
+            <input class="form-control" placeholder="Ingrese su clave" type="password" name="password" required #password="ngModel" [(ngModel)]="user.password">
+            <span *ngIf="!password.valid && password.dirty" class="error">la clave es requerida.</span>
+          </div>
+
+          <div class="center margin-y">
+            <button type="submit" class="btn btn-primary" [disabled]="formUser.form.invalid">Crear usuario</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

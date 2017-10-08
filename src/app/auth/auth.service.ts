@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
-import { GLOBAL } from '../global';
+
+import { Injectable } from '@angular/core';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import { Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+
+import { GLOBAL } from '../global';
 
 @Injectable()
 export class AuthService {
@@ -25,16 +27,16 @@ export class AuthService {
   }
 
   getIdentity() {
-    let identity = JSON.parse(localStorage.getItem('identity'));
-    identity != 'undefined'
+    let identity = JSON.parse(localStorage.getItem("identity"));
+    identity != "undefined"
       ? (this.identity = identity)
       : (this.identity = null);
     return this.identity;
   }
 
   getToken() {
-    let token = localStorage.getItem('token');
-    token != 'undefined' ? (this.token = token) : (this.token = null);
+    let token = localStorage.getItem("token");
+    token != "undefined" ? (this.token = token) : (this.token = null);
     return this.token;
   }
 
@@ -44,9 +46,9 @@ export class AuthService {
     }
     let json = JSON.stringify(userToLogin);
     let params = json;
-    let headers = new Headers({ 'Content-type': 'application/json' });
+    let headers = new Headers({ "Content-type": "application/json" });
     return this.http
-      .post(this.url + 'iniciar-sesion', params, { headers: headers })
+      .post(this.url + "iniciar-sesion", params, { headers: headers })
       .map(res => res.json());
   }
 
@@ -54,10 +56,10 @@ export class AuthService {
     let json = JSON.stringify(userToRegister);
     let params = json;
 
-    let headers = new Headers({ 'Content-type': 'application/json' });
+    let headers = new Headers({ "Content-type": "application/json" });
 
     return this.http
-      .post(this.url + 'register', params, { headers: headers })
+      .post(this.url + "registrar-usuario", params, { headers: headers })
       .map(res => res.json());
   }
 
@@ -65,11 +67,11 @@ export class AuthService {
     let json = JSON.stringify(userToUpdate);
     let params = json;
     let headers = new Headers({
-      'Content-type': 'application/json',
+      "Content-type": "application/json",
       Authorization: this.getToken()
     });
     return this.http
-      .put(this.url + 'actualizar-usuario/' + userToUpdate._id, params, {
+      .put(this.url + "actualizar-usuario/" + userToUpdate._id, params, {
         headers: headers
       })
       .map(res => res.json());
@@ -77,23 +79,34 @@ export class AuthService {
 
   getUser(token, id: String) {
     let headers = new Headers({
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: token
     });
     let options = new RequestOptions({ headers: headers });
     return this.http
-      .get(this.url + 'usuario/' + id, options)
+      .get(this.url + "usuario/" + id, options)
       .map(res => res.json());
   }
 
   getUsers(token) {
     let headers = new Headers({
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: token
     });
     let options = new RequestOptions({ headers: headers });
     return this.http
-      .get(this.url + 'usuarios/', options)
+      .get(this.url + "usuarios/", options)
       .map(res => res.json());
   }
+
+  // getUsersByJob(token): Observable<any> {
+  //   let headers = new Headers({
+  //     "Content-Type": "application/json",
+  //     Authorization: token
+  //   });
+  //   let options = new RequestOptions({ headers: headers });
+  //   return this.http
+  //     .get(this.url + "usuarios/", options)
+  //     .map(res => res.json());
+  // }
 }

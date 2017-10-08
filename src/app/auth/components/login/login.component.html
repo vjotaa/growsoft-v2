@@ -1,27 +1,25 @@
 <div *ngIf="!identity">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8">
-        <img class="warningImage" [src]="alert">
+      <div class="col-md-4">
+        <video class="warningImage" [src]="videoPath" autoplay="true" loop="true"></video>
       </div>
       <div class="col-md-4">
-        <form class="form-signin" [formGroup]="rForm" (ngSubmit)="onSubmit()">
-          <h2 class="form-signin-heading">Iniciar sesion</h2>
-          <img class="rounded mx-auto d-block size" [src]="logoPath">
-          <div formGroupName="login">
-            <p>{{alertMessage}}</p>
-            <label class="sr-only">Name</label>
-            <input class="form-control" type="email" formControlName='email' placeholder="Nombre de usuario" [(ngModel)]="user.email">
-            <label class="sr-only">Password</label>
-            <input class="form-control" type="password" formControlName='password' placeholder="Contraseña" [(ngModel)]="user.password">
-            <input class="btn btn-xs btn-primary btn-block col-md-4 offset-md-4" type="submit" value="Entrar" [disabled]="rForm.invalid">
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-8">
-        <h2>Si no posees cuenta de usuario por favor retirarse de la pagina</h2>
+        <div class="box-true">
+          <form class="form-signin" [formGroup]="rForm" (ngSubmit)="onSubmit()">
+            <h2 class="form-signin-heading">Iniciar sesion</h2>
+            <img class="rounded mx-auto d-block size" [src]="logoPath">
+            <div formGroupName="login">
+              <p>{{alertMessage}}</p>
+              <label class="sr-only">Name</label>
+              <input class="form-control" type="email" formControlName='email' placeholder="Nombre de usuario" [(ngModel)]="user.email">
+              <label class="sr-only">Password</label>
+              <input class="form-control" type="password" formControlName='password' placeholder="Contraseña" [(ngModel)]="user.password">
+              <input class="btn btn-xs btn-primary btn-block col-md-4 offset-md-4" type="submit" value="Entrar" [disabled]="rForm.invalid">
+            </div>
+          </form>
+
+        </div>
       </div>
     </div>
   </div>

@@ -5,8 +5,11 @@ p {
 input {
   margin-bottom: 15px;
 }
+.container-fluid {
+  padding: 0;
+}
 .row {
-  margin-top: 10%;
+  margin: 0;
 }
 .size {
   width: 170px;
@@ -14,5 +17,16 @@ input {
 }
 
 .warningImage {
-  width: 500px;
+  width: 200.5vh;
+}
+
+.col-md-4 {
+  padding: 0;
+}
+.box-true {
+  margin-top: 40px;
+}
+
+form {
+  padding: 0rem 6rem 0rem 6rem;
 }

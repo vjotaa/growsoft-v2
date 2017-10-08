@@ -1,7 +1,7 @@
 h1,
 a,
 p {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: rgba(0, 0, 0, 0.6);
   font-size: 17px;
 }
@@ -10,7 +10,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: rgba(0, 0, 0, 0.6);
 }
 a {
@@ -41,6 +41,12 @@ a {
   margin-bottom: 100px;
   margin-top: 100px;
 }
+
+.box {
+  padding: 2rem;
+  background: #f2f2f2;
+  border: 1px solid #e2dbdb;
+}
 ::-webkit-scrollbar {
   width: 9px; /* for vertical scrollbars */
   height: 9px; /* for horizontal scrollbars */
@@ -61,8 +67,14 @@ a {
 
 .btn-primary {
   color: #fff;
-  background-color: #ef4b3e;
-  border-color: #d9534f;
+  background-color: #ef4b3e !important;
+  border-color: #d9534f !important;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .btn-primary:hover {
