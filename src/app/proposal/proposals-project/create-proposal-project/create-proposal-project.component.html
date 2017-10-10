@@ -1,0 +1,64 @@
+<div class="container b-t">
+  <div class="row">
+    <div class=" col-12 col-lg-6 offset-lg-3 offset-lg-3">
+      <div class="box">
+        <form #formProposalProject="ngForm" (ngSubmit)="onSubmit()">
+          <h5>Crear Propuesta de proyecto</h5>
+          <hr>
+          <div *ngIf="alertMessage">
+            <div class="error">
+              {{alertMessage}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Titulo</label>
+            <input class="form-control" placeholder="Titulo del proyecto" type="text" name="title" required #title="ngModel" [(ngModel)]="proposalP.title"
+              only-number>
+            <span *ngIf="!title.valid && title.dirty" class="error">El titulo es requerido.</span>
+          </div>
+          <div class="form-group">
+            <label>Descripcion </label>
+            <textarea class="form-control" placeholder="Ingrese la descripcion del proyecto" type="text" name="description" required
+              #description="ngModel" [(ngModel)]="proposalP.description"></textarea>
+            <span *ngIf="!description.valid && description.dirty" class="error">La descripcion es requerida.</span>
+          </div>
+          <div class="form-group">
+            <label>Precio</label>
+            <input class="form-control" placeholder="Ingrese el precio a pagar por hora" type="text" name="price" required #price="ngModel"
+              [(ngModel)]="proposalP.price">
+            <span *ngIf="!price.valid && price.dirty" class="error">El precio es requerido.</span>
+          </div>
+
+          <div class="form-group">
+            <label> Herramientas </label>
+            <div *ngFor="let item of tools; let idx=index">
+              <input value="{{item._id}}" (change)="updateCheckedTools(item._id,$event)" type="checkbox">{{item.name}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label> Dise;adores</label>
+            <div *ngFor="let item of usersDesigners; let idx=index">
+              <input value="{{item._id}}" (change)="updateCheckedD(item,$event)" type="checkbox">{{item.name}}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label> Desarrolladores </label>
+            <div *ngFor="let item of usersProgrammers; let idx=index">
+              <input value="{{item._id}}" (change)="updateCheckedD(item,$event)" type="checkbox">{{item.name}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label> Full stack </label>
+            <div *ngFor="let item of usersFullStack; let idx=index">
+              <input value="{{item._id}}" (change)="updateCheckedD(item,$event)" type="checkbox">{{item.name}}
+            </div>
+          </div>
+          <div class="center margin-y">
+            <button type="submit" class="btn btn-primary" [disabled]="formProposalProject.form.invalid">Crear usuario</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
