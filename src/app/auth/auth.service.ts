@@ -99,14 +99,14 @@ export class AuthService {
       .map(res => res.json());
   }
 
-  // getUsersByJob(token): Observable<any> {
-  //   let headers = new Headers({
-  //     "Content-Type": "application/json",
-  //     Authorization: token
-  //   });
-  //   let options = new RequestOptions({ headers: headers });
-  //   return this.http
-  //     .get(this.url + "usuarios/", options)
-  //     .map(res => res.json());
-  // }
+  getUsersByJob(token, id: string): Observable<any> {
+    let headers = new Headers({
+      "Content-Type": "application/json",
+      Authorization: token
+    });
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .get(this.url + "usuarios/", options)
+      .map(res => res.json().users);
+  }
 }
