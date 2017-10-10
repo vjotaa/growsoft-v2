@@ -1,16 +1,19 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
+import { Article } from '../../../article/article';
+import { ArticleService } from '../../../article/article.service';
+import { GLOBAL } from './../../../global';
 import { Project } from './../../../project/project';
 import { ProjectService } from './../../../project/project.service';
-import { GLOBAL } from './../../../global';
 import { AuthService } from './../../auth.service';
-import { ActivatedRoute, Router, Params } from '@angular/router';
 import { User } from './../../user';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
-  providers: [ProjectService, AuthService]
+  selector: "app-profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"],
+  providers: [ProjectService, AuthService, ArticleService]
 })
 export class ProfileComponent implements OnInit {
   image_not_found: string;
@@ -19,13 +22,15 @@ export class ProfileComponent implements OnInit {
   public token;
   public url: String;
   public projects: Project[];
+  public articles: Article[];
   public limit: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private articleService: ArticleService
   ) {
     this.identity = this.authService.getIdentity();
     this.token = this.authService.getToken();
@@ -34,7 +39,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    this.image_not_found = '/assets/images/imagen-not-found.png';
+    this.image_not_found = "/assets/images/imagen-not-found.png";
   }
 
   onLimit() {
@@ -46,11 +51,11 @@ export class ProfileComponent implements OnInit {
   }
   getUser() {
     this.route.params.forEach((params: Params) => {
-      let id = params['id'];
+      let id = params["id"];
       this.authService.getUser(this.token, id).subscribe(
         response => {
           if (!response.user) {
-            this.router.navigate(['/']);
+            this.router.navigate(["/"]);
           } else {
             this.user = response.user;
             this.projectService
@@ -58,7 +63,7 @@ export class ProfileComponent implements OnInit {
               .subscribe(
                 response => {
                   if (!response.projects) {
-                    console.log('este usuario no tiene proyectos aun');
+                    console.log("este usuario no tiene proyectos aun");
                   } else {
                     this.projects = response.projects;
                   }
@@ -72,6 +77,15 @@ export class ProfileComponent implements OnInit {
                   }
                 }
               );
+            this.articleService
+              .getArticles(this.token, response.user._id)
+              .subscribe(result => {
+                if (!result.articles) {
+                  console.log("Este usuario no tiene articulos aun");
+                } else {
+                  this.articles = result.articles;
+                }
+              });
           }
         },
         error => {
@@ -89,7 +103,7 @@ export class ProfileComponent implements OnInit {
     this.projectService.deleteProject(this.token, id).subscribe(
       response => {
         if (!response.project) {
-          console.log('Error in the server');
+          console.log("Error in the server");
         } else {
           this.getUser();
         }

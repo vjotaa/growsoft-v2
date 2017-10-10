@@ -9,6 +9,14 @@
         <div class="btn btn-outline-info btn-sm">Crear proyecto
         </div>
       </a>
+      <a routerLink="/crear-articulo">
+        <div class="btn btn-outline-info btn-sm">Crear articulo
+        </div>
+      </a>
+      <a routerLink="/crear-propuesta-proyecto">
+        <div class="btn btn-outline-info btn-sm">Crear nueva propuesta de proyecto
+        </div>
+      </a>
     </section>
     <ng-template #buttonHero>
       <a class="pointer">
@@ -50,6 +58,35 @@
             </div>
           </div>
           <p class="project-name">{{project.title}}</p>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Articulos</h2>
+<div class="container">
+  <div class="row no-margin">
+    <div class="col-lg-6 col-xs-12 portfolio-item" *ngFor="let article of (articles ? articles.slice(0,limit? 4:6): [])">
+      <div class="project-item">
+        <a [routerLink]="['/articulo/',article._id]">
+          <div class="portfolio-box card h-100">
+            <div *ngIf="article.image=='null';else imageDefault">
+              <img class="card-img-top img-fluid" [src]="image_not_found">
+            </div>
+            <ng-template #imageDefault>
+              <img class="card-img-top img-fluid" [src]="url+'imagen-articulo/'+article.image">
+            </ng-template>
+            <div class="portfolio-box-caption">
+
+              <div class="portfolio-box-caption-content">
+                <div class="project-description">
+                  {{article.description}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="project-name">{{article.title}}</p>
         </a>
 
       </div>
