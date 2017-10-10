@@ -1,0 +1,10 @@
+<div class="b-t">
+  <div *ngIf="identity">
+    <div class="center margin-y " *ngIf="article?.user._id == identity._id">
+      <button type="submit" class="btn btn-primary" routerLink="/editar-articulo/{{article._id}}">Editar proyecto</button>
+    </div>
+  </div>
+
+  <p>{{article | json}}</p>
+  <p>{{genres | json}} </p>
+</div>

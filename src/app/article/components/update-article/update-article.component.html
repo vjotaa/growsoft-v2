@@ -1,0 +1,47 @@
+<div class="container b-t">
+  <div class="row">
+    <div class=" col-12 col-lg-6 offset-lg-3 offset-lg-3">
+      <div class="box">
+        <form #formArticle="ngForm" (ngSubmit)="onSubmit()">
+          <h5>Crear articulo</h5>
+          <hr>
+          <div *ngIf="alertMessage">
+            <div class="error">
+              {{alertMessage}}
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Titulo</label>
+            <input class="form-control" placeholder="Titulo del proyecto" type="text" name="title" required #title="ngModel" [(ngModel)]="article.title"
+              only-number>
+            <span *ngIf="!title.valid && title.dirty" class="error">El titulo es requerido.</span>
+          </div>
+          <div class="form-group">
+            <label>Descripcion </label>
+            <textarea class="form-control" placeholder="Ingrese la descripcion del proyecto" type="text" name="description" required
+              #description="ngModel" [(ngModel)]="article.description"></textarea>
+            <span *ngIf="!description.valid && description.dirty" class="error">La descripcion es requerida.</span>
+          </div>
+
+          <div *ngIf="article.image && article.image != null">
+            <img src='{{url+"imagen-proyecto/"+article.image}}' style="width: 50px;" alt="">
+            <p>
+              <label>Sube la imagen del articulo</label>
+              <input type="file" placegolder="Sube tu imagen" (change)="fileChangeEvent($event)">
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label> Generos </label>
+            <div *ngFor="let item of genres; let idx=index">
+              <input value="{{item._id}}" (change)="updateChecked(item._id,$event)" type="checkbox">{{item.name}}
+            </div>
+          </div>
+          <div class="center margin-y">
+            <button type="submit" class="btn btn-primary" [disabled]="formArticle.form.invalid">Crear Articulo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
