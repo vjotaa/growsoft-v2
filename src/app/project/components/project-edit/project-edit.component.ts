@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { AuthService } from './../../../auth/auth.service';
@@ -51,6 +51,13 @@ import { UploadService } from './../../upload.service';
           </p>
         </div>
 
+        <div class="form-group">
+        <label> Herramientas </label>
+        <div  *ngFor="let item of tools; let idx=index">
+        <input  value="{{item._id}}" (change)="updateChecked(item._id,$event)" type="checkbox">{{item.name}}
+      </div> 
+      </div>
+
         <div class="center margin-y">
           <button type="submit" class="btn btn-primary" [disabled]="formProject.form.invalid">Modificar proyecto</button>
         </div>
@@ -69,14 +76,16 @@ export class ProjectEditComponent implements OnInit {
   public url: string;
   public filesToUpload: Array<File>;
   public alertMessage: string;
+  public tools: any;
+  public toolsSelected: any;
+  public check;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
     private projectService: ProjectService,
-    private uploadService: UploadService,
-    private fb: FormBuilder
+    private uploadService: UploadService
   ) {
     this.identity = this.authService.getIdentity();
     this.token = this.authService.getToken();
@@ -86,11 +95,19 @@ export class ProjectEditComponent implements OnInit {
 
   ngOnInit() {
     this.getProject();
+    this.projectService.getTools(this.token, "").subscribe(res => {
+      if (res) {
+        this.tools = res;
+        console.log(this.tools);
+        this.check = [];
+      }
+    });
   }
 
   getProject() {
     this.route.params.forEach((params: Params) => {
       let id = params["id"];
+
       this.projectService.getProject(this.token, id).subscribe(
         response => {
           if (!response.project) {
@@ -114,6 +131,8 @@ export class ProjectEditComponent implements OnInit {
   onSubmit() {
     this.route.params.forEach((params: Params) => {
       let id = params["id"];
+      this.toolsSelected = this.check.join();
+      this.project.tools = this.toolsSelected;
       this.projectService.editProject(this.token, id, this.project).subscribe(
         response => {
           if (!response.project) {
@@ -121,7 +140,7 @@ export class ProjectEditComponent implements OnInit {
           } else {
             this.alertMessage = "El proyecto fue actualizado correctamente";
             if (!this.filesToUpload) {
-              this.router.navigate(["/usuario", response.project.user]);
+              this.router.navigate(["/proyecto", response.project._id]);
             } else {
               this.uploadService
                 .makeFileRequest(
@@ -133,7 +152,7 @@ export class ProjectEditComponent implements OnInit {
                 )
                 .then(
                   result => {
-                    this.router.navigate(["/usuario", response.project.user]);
+                    this.router.navigate(["/proyecto", response.project._id]);
                   },
                   error => {
                     console.log(error);
@@ -156,5 +175,14 @@ export class ProjectEditComponent implements OnInit {
 
   fileChangeEvent(fileInput: any) {
     this.filesToUpload = <Array<File>>fileInput.target.files;
+  }
+  updateChecked(value, event) {
+    if (event.target.checked) {
+      this.check.push(value);
+    } else if (!event.target.checked) {
+      const index = this.check.indexOf(value);
+      this.check.splice(index, 1);
+    }
+    console.log(this.check);
   }
 }

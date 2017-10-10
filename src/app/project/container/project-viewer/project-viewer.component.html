@@ -1,18 +1,27 @@
-
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <p>{{project?.title}}</p>
-        <p>{{project?.description}}</p>
-        <div *ngIf="project?.image && project?.image!='null'" >
-          <img src= '{{url+"imagen-proyecto/"+project?.image}}' style="width: 500px;" alt="">
-          <app-project-edit [hidden]="!isOn"></app-project-edit>
-          
-        <div>
+<div class="container b-t">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="identity">
+        <div class="center margin-y " *ngIf="project?.user._id == identity._id">
+          <button type="submit" class="btn btn-primary" routerLink="/editar-proyecto/{{project._id}}">Editar proyecto</button>
+        </div>
       </div>
     </div>
-    <div *ngIf="identity">
-    <p><button *ngIf="project.user._id == identity._id"  (click)="setState()">Editar proyecto</button><p>
-      
+    <div class="row">
+      <div class="col-12">
+        <p>{{project?.title}}</p>
+        <p>{{project?.description}}</p>
+        <div *ngIf="project?.image && project?.image!='null'">
+          <img src='{{url+"imagen-proyecto/"+project?.image}}' style="width: 500px;" alt="">
+          <div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <ul *ngFor="let item of tools">
+        <li>{{item.name}}</li>
+      </ul>
     </div>
   </div>
+</div>

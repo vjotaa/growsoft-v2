@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { AuthService } from './../../../auth/auth.service';
@@ -60,7 +59,6 @@ import { UploadService } from './../../upload.service';
   `
 })
 export class AddProjectComponent implements OnInit {
-  public rForm: FormGroup;
   public user: User;
   public identity;
   public token;
@@ -77,7 +75,6 @@ export class AddProjectComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private projectService: ProjectService,
-    private fb: FormBuilder,
     private uploadService: UploadService
   ) {
     this.title = "Crear proyecto";

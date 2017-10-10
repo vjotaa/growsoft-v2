@@ -1,25 +1,27 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
+import { AuthService } from './../../../auth/auth.service';
 import { User } from './../../../auth/user';
-import { UploadService } from './../../upload.service';
 import { GLOBAL } from './../../../global';
 import { ProjectService } from './../../project.service';
-import { AuthService } from './../../../auth/auth.service';
-import { ActivatedRoute, Router, Params } from '@angular/router';
-import { Project } from './../../project';
-import { Component, OnInit } from '@angular/core';
+import { UploadService } from './../../upload.service';
+
 @Component({
-  selector: 'app-project-viewer',
-  styleUrls: ['./project-viewer.component.scss'],
+  selector: "app-project-viewer",
+  styleUrls: ["./project-viewer.component.scss"],
   providers: [ProjectService, UploadService],
-  templateUrl: './project-viewer.component.html'
+  templateUrl: "./project-viewer.component.html"
 })
 export class ProjectViewerComponent implements OnInit {
-  public project: Project;
+  public project: any;
+  public projectDetail: any;
   public user: User;
   public identity;
   public token;
   public url: string;
   public alertMessage: string;
-  public isOn: boolean = false;
+  public tools: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,21 +38,17 @@ export class ProjectViewerComponent implements OnInit {
     this.getProject();
   }
 
-  getButtonText(): string {
-    return `Switch ${this.isOn ? 'Off' : 'On'}`;
-  }
-  setState(): void {
-    this.isOn = !this.isOn;
-  }
   getProject() {
     this.route.params.forEach((params: Params) => {
-      let id = params['id'];
+      let id = params["id"];
       this.projectService.getProject(this.token, id).subscribe(
         response => {
+          console.log(response.project);
           if (!response.project) {
-            this.router.navigate(['/']);
+            this.router.navigate(["/"]);
           } else {
             this.project = response.project;
+            this.tools = response.project.tools;
           }
         },
         error => {
