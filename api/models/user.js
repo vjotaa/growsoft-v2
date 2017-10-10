@@ -12,7 +12,7 @@ var UserSchema = Schema({
   username: String,
   password: String,
   image: String,
-  jobs: [{ type: Schema.ObjectId, ref: "Jobs" }],
+  jobs: { type: Schema.ObjectId, ref: "Jobs" },
   role: { type: Schema.ObjectId, ref: "roles" }
 });
 

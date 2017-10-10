@@ -9,6 +9,7 @@ function getArticle(req, res) {
   articleId = req.params.id;
   Article.findById(articleId)
     .populate({ path: "user" })
+    .populate({ path: "genres", select: "name" })
     .exec((err, article) => {
       if (err) {
         console.log(err);

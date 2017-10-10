@@ -14,6 +14,7 @@ var ProposalProjectSchema = Schema({
   tools: [{ type: Schema.ObjectId, ref: "Tools" }],
   programmers: [{ type: Schema.ObjectId, ref: "User" }],
   designers: [{ type: Schema.ObjectId, ref: "User" }],
+  fullStack: [{ type: Schema.ObjectId, ref: "User" }],
   status: { type: Schema.ObjectId, ref: "Status" }
 });
 

@@ -9,6 +9,7 @@ function getProject(req, res) {
   projectId = req.params.id;
   Project.findById(projectId)
     .populate({ path: "user" })
+    .populate({ path: "tools", select: "name" })
     .exec((err, project) => {
       if (err) {
         console.log(err);

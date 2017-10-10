@@ -17,7 +17,8 @@ function registerUser(req, res) {
   user.email = params.email;
   user.username = params.username;
   user.image = "null";
-  user.role = "59c5580b84e371468a7e3627";
+  user.role = "59dd0762efc02e3bce491ba7";
+  user.jobs = "59dd1c16d886ea5435e49385";
   emailCheck = validator.isEmail(params.email);
 
   //Email existence
@@ -290,7 +291,6 @@ function getUsersByRole(req, res) {
 
 function getUsersByJobs(req, res) {
   var jobId = req.params.jobs;
-  console.log(jobId);
   if (!jobId) {
     var find = User.find({});
   } else {

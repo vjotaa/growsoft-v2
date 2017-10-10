@@ -10,7 +10,7 @@ function addNotificationToProposal(req, res) {
   params = req.body;
   notification.users = params.users.replace(/\s/g, "").split(",");
   notification.proposal_project = params.proposal_project;
-  notification.status = "59c558d4be86a7479c199bf3";
+  notification.status = "59dd07bfefc02e3bce491ba9";
 
   notification.save((err, notificationStored) => {
     if (err) {

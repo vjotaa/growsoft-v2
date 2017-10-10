@@ -14,6 +14,7 @@ function createProposal(req, res) {
   proposalProject.tools = params.tools.replace(/\s/g, "").split(",");
   proposalProject.programmers = _empty(params.programmers);
   proposalProject.designers = _empty(params.designers);
+  proposalProject.fullStack = _empty(params.fullStack);
   proposalProject.status = "59c558d4be86a7479c199bf3";
   proposalProject.user = params.user;
 
@@ -53,6 +54,7 @@ function getProposals(req, res) {
     var find = ProposalProject.find({ _id: proposalId }).sort("title");
   }
   find
+    .populate({ path: "fullStack", select: "name" })
     .populate({ path: "programmers", select: "name" })
     .populate({ path: "user", select: "name" })
     .populate({ path: "designers", select: "name" })
